@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive 4x4 Circles with Background Image</title>
+    <style>
+        body {
+            display: flex;
+            justify-content:center;
+            align-items: baseline;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://i.ibb.co/x6yDNqX/test.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden; /* Prevents body from scrolling */
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 14vw);
+            grid-gap: 0px;
+            border: 0px solid black;
+            padding-left: 20px;
+            position: absolute;
+            top: 70px;
+            left: 80px;
+            width: 260px;
+            background-color: rgba(255, 255, 255, 0);
+        }
+        .circle {
+            width: 14vw;
+            height: 14vw;
+            background-color: rgba(128, 128, 128, 0);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5vw;
+            color: rgba(255, 255, 255, 0.765);
+            position: relative;
+        }
+        .circlewhite {
+            width: 12vw;
+            height: 12vw;
+            background-color: rgba(128, 128, 128, 0);
+            border-radius: 0%;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5vw;
+            color: rgba(255, 255, 255, 0);
+            position: relative;
+        }
+        .green {
+            background-color: rgba(0, 255, 0, 0.532) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+        <div class="circle">4</div>
+        <div class="circle">1</div>
+        <div class="circlewhite"></div>
+        <div class="circle">3</div>
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+        <div class="circle">2</div>
+        <div class="circlewhite"></div>
+        <div class="circlewhite"></div>
+    </div>
+
+    <script>
+        // Function to handle touch move events on circles
+        function handleTouchMove(event) {
+            event.preventDefault(); // Prevent default scrolling behavior
+            const touch = event.touches[0];
+            const elementUnderFinger = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (elementUnderFinger && elementUnderFinger.classList.contains('circle')) {
+                elementUnderFinger.classList.add('green');
+            }
+        }
+
+        document.querySelectorAll('.circle').forEach(circle => {
+            circle.addEventListener('mouseenter', () => {
+                circle.classList.add('green');
+            });
+
+            circle.addEventListener('touchstart', () => {
+                circle.classList.add('green');
+            });
+
+            // Use touchmove event to enable painting effect
+            circle.addEventListener('touchmove', handleTouchMove);
+        });
+
+    </script>
+</body>
+</html>
